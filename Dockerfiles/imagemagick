@@ -15,7 +15,9 @@ WORKDIR /opt/ImageMagick/src/ImageMagick-6.8.6-10
 RUN ./configure --prefix=/opt/ImageMagick --enable-shared --disable-openmp --disable-opencl --without-x --with-perl=/opt/perl/bin/perl \
   && make \
   && make install \
-  && make clean
+  && make clean \
+  && rm -rf /opt/ImageMagick/share \
+  && rm -rf /opt/ImageMagick/src
 
 # add library path
 RUN echo '/opt/ImageMagick/lib/' > /etc/ld.so.conf.d/imagemagick.conf \
