@@ -14,5 +14,7 @@ RUN curl https://raw.githubusercontent.com/DQNEO/cookbook-imagemagick/master/fil
 WORKDIR /opt/ImageMagick/src/ImageMagick-6.8.6-10
 RUN ./configure --prefix=/opt/ImageMagick --enable-shared --disable-openmp --disable-opencl --without-x --with-perl=/opt/perl/bin/perl \
   && make \
-  && make install
+  && make install \
+  && make clean
+
 CMD /opt/perl/bin/perl -MImage::Magick -E 'say $Image::Magick::Q16::VERSION'
