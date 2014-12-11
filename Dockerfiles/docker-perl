@@ -17,6 +17,7 @@ RUN ./Configure  -Dprefix=/opt/perl -Duse64bitall  -des \
       # && TEST_JOBS=$(nproc) make test_harness \
         && make install \
         && make veryclean
+        && rm -rf /opt/perl/man
 
 WORKDIR /usr/src
 RUN curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
