@@ -23,6 +23,10 @@ RUN curl -SL https://cpan.metacpan.org/authors/id/S/SH/SHAY/perl-5.20.1.tar.bz2 
 RUN (curl -L http://cpanmin.us | /opt/perl/bin/perl -  App::cpanminus) \
     && rm -rf /root/.cpanm/work/*
 
+# install carton
+RUN /opt/perl/bin/cpanm Carton \
+    && rm -rf /root/.cpanm/work/*
+
 WORKDIR /root
 
 CMD ["/opt/perl/bin/perl","-v"]
