@@ -1,2 +1,3 @@
-# Docker image for perl
+# Dockerfiles for perl and imagemagick
+
 
