@@ -14,7 +14,7 @@ RUN curl -SL https://cpan.metacpan.org/authors/id/S/SH/SHAY/perl-5.20.1.tar.bz2 
 
 RUN ./Configure  -Dprefix=/opt/perl -Duse64bitall  -des \
         && make -j$(nproc) \
-        && TEST_JOBS=$(nproc) make test_harness \
+      # && TEST_JOBS=$(nproc) make test_harness \
         && make install \
         && make veryclean
 
