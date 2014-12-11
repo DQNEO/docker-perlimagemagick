@@ -15,8 +15,8 @@ RUN curl -SL https://cpan.metacpan.org/authors/id/S/SH/SHAY/perl-5.20.1.tar.bz2 
         && make -j$(nproc) \
       # && TEST_JOBS=$(nproc) make test_harness \
         && make install \
-        && make veryclean
-        && rm -rf /opt/perl/man
+        && make veryclean \
+        && rm -rf /opt/perl/man \
         && rm -rf /usr/src/perl
 
 WORKDIR /usr/src
