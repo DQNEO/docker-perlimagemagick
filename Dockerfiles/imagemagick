@@ -1,9 +1,6 @@
 FROM dqneo/perl:5.20.1
 MAINTAINER DQNEO
 
-RUN yum -y update; yum clean all
-
-RUN yum -y install gcc make tar; yum clean all
 RUN yum -y install libjpeg-turbo libjpeg-turbo-devel libpng-devel; yum clean all
 
 RUN mkdir -p /opt/ImageMagick/src
