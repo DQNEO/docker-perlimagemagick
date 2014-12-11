@@ -6,8 +6,9 @@ RUN yum -y install libjpeg-turbo libjpeg-turbo-devel libpng-devel; yum clean all
 RUN mkdir -p /opt/ImageMagick/src
 WORKDIR /opt/ImageMagick/src/
 
-RUN curl https://raw.githubusercontent.com/DQNEO/cookbook-imagemagick/master/files/default/ImageMagick-6.8.6-10.tar.gz -o ImageMagick-6.8.6-10.tar.gz
-RUN tar xf ImageMagick-6.8.6-10.tar.gz
+RUN curl https://raw.githubusercontent.com/DQNEO/cookbook-imagemagick/master/files/default/ImageMagick-6.8.6-10.tar.gz -o ImageMagick-6.8.6-10.tar.gz \
+ && tar xf ImageMagick-6.8.6-10.tar.gz \
+ && rm ImageMagick-6.8.6-10.tar.gz
 
 # compile & install
 WORKDIR /opt/ImageMagick/src/ImageMagick-6.8.6-10
