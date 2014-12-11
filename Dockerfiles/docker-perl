@@ -1,7 +1,9 @@
-FROM buildpack-deps
-MAINTAINER Peter Martini <PeterCMartini@GMail.com>
+FROM centos:centos6
+MAINTAINER DQNEO
 
-RUN apt-get update && apt-get install -y curl procps
+# install required packages
+RUN yum -y update; yum clean all
+RUN yum -y install tar bzip2 gcc make; yum clean all
 
 RUN mkdir /usr/src/perl
 WORKDIR /usr/src/perl
@@ -12,7 +14,7 @@ RUN curl -SL https://cpan.metacpan.org/authors/id/S/SH/SHAY/perl-5.20.1.tar.bz2 
     && tar --strip-components=1 -xjf perl-5.20.1.tar.bz2 -C /usr/src/perl \
     && rm perl-5.20.1.tar.bz2 /tmp/sha1.txt
 
-RUN ./Configure -Duse64bitall  -des \
+RUN ./Configure --prefix=/opt/perl -Duse64bitall  -des \
         && make -j$(nproc) \
         && TEST_JOBS=$(nproc) make test_harness \
         && make install \
@@ -27,4 +29,4 @@ RUN curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
 
 WORKDIR /root
 
-CMD ["perl5.20.1","-de0"]
+CMD ["/opt/perl/bin/perl","-de0"]
