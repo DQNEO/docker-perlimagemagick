@@ -17,4 +17,8 @@ RUN ./configure --prefix=/opt/ImageMagick --enable-shared --disable-openmp --dis
   && make install \
   && make clean
 
+# add library path
+RUN echo '/opt/ImageMagick/lib/' > /etc/ld.so.conf.d/imagemagick.conf \
+    && ldconfig
+
 CMD /opt/perl/bin/perl -MImage::Magick -E 'say $Image::Magick::Q16::VERSION'
