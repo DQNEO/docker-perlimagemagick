@@ -27,4 +27,4 @@ RUN curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
 
 WORKDIR /root
 
-CMD ["/opt/perl/bin/perl","-de0"]
+CMD ["/opt/perl/bin/perl","-v"]
