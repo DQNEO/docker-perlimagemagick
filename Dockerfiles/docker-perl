@@ -19,11 +19,9 @@ RUN curl -SL https://cpan.metacpan.org/authors/id/S/SH/SHAY/perl-5.20.1.tar.bz2 
         && rm -rf /opt/perl/man \
         && rm -rf /usr/src/perl
 
-WORKDIR /usr/src
-RUN curl -LO https://raw.githubusercontent.com/miyagawa/cpanminus/master/cpanm \
-        && /opt/perl/bin/perl ./cpanm App::cpanminus \
-        && rm -fr /root/.cpanm \
-        && rm ./cpanm
+# install cpanm
+RUN (curl -L http://cpanmin.us | /opt/perl/bin/perl -  App::cpanminus) \
+    && rm -rf /root/.cpanm/work/*
 
 WORKDIR /root
 
