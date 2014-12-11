@@ -12,5 +12,5 @@ RUN curl https://raw.githubusercontent.com/DQNEO/cookbook-imagemagick/master/fil
 
 # compile & install
 WORKDIR /opt/ImageMagick/src/ImageMagick-6.8.6-10
-RUN ./configure --prefix=/opt/ImageMagick --enable-shared --disable-openmp --disable-opencl --without-x && \
+RUN ./configure --prefix=/opt/ImageMagick --enable-shared --disable-openmp --disable-opencl --without-x --with-perl=/opt/perl/bin/perl && \
  make && make install
