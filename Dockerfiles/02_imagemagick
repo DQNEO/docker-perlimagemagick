@@ -9,7 +9,7 @@ ENV IM_PREFIX /opt/ImageMagick
 
 RUN mkdir -p ${IM_PREFIX}/src
 WORKDIR ${IM_PREFIX}/src/
-RUN curl https://raw.githubusercontent.com/DQNEO/imagemagicks/master/${IM_ARCHIVE} -o ${IM_ARCHIVE} \
+RUN curl -sL https://raw.githubusercontent.com/DQNEO/imagemagicks/master/${IM_ARCHIVE} -o ${IM_ARCHIVE} \
   && tar xf ${IM_ARCHIVE} \
   && rm ${IM_ARCHIVE} \
   && cd ImageMagick-${IM_VERSION} \
