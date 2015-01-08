@@ -3,22 +3,25 @@ MAINTAINER DQNEO
 
 RUN yum -y install libjpeg-turbo libjpeg-turbo-devel libpng-devel; yum clean all
 
-RUN mkdir -p /opt/ImageMagick/src
-WORKDIR /opt/ImageMagick/src/
+ENV IM_VERSION 6.8.6-10
+ENV IM_ARCHIVE ImageMagick-${IM_VERSION}.tar.gz
+ENV IM_PREFIX /opt/ImageMagick
 
-RUN curl https://raw.githubusercontent.com/DQNEO/cookbook-imagemagick/master/files/default/ImageMagick-6.8.6-10.tar.gz -o ImageMagick-6.8.6-10.tar.gz \
-  && tar xf ImageMagick-6.8.6-10.tar.gz \
-  && rm ImageMagick-6.8.6-10.tar.gz \
-  && cd ImageMagick-6.8.6-10 \
-  && ./configure --prefix=/opt/ImageMagick --enable-shared --disable-openmp --disable-opencl --without-x --with-perl=/opt/perl/bin/perl \
+RUN mkdir -p ${IM_PREFIX}/src
+WORKDIR ${IM_PREFIX}/src/
+RUN curl https://raw.githubusercontent.com/DQNEO/imagemagicks/master/${IM_ARCHIVE} -o ${IM_ARCHIVE} \
+  && tar xf ${IM_ARCHIVE} \
+  && rm ${IM_ARCHIVE} \
+  && cd ImageMagick-${IM_VERSION} \
+  && ./configure --prefix=${IM_PREFIX} --enable-shared --disable-openmp --disable-opencl --without-x --with-perl=perl \
   && make \
   && make install \
   && make clean \
-  && rm -rf /opt/ImageMagick/share \
-  && rm -rf /opt/ImageMagick/src
+  && rm -rf ${IM_PREFIX}/share \
+  && rm -rf ${IM_PREFIX}/src
 
 # add library path
-RUN echo '/opt/ImageMagick/lib/' > /etc/ld.so.conf.d/imagemagick.conf \
+RUN echo '${IM_PREFIX}/lib/' > /etc/ld.so.conf.d/imagemagick.conf \
     && ldconfig
 
-CMD /opt/perl/bin/perl -MImage::Magick -E 'say $Image::Magick::Q16::VERSION'
+CMD perl -MImage::Magick -E 'say $Image::Magick::Q16::VERSION'
