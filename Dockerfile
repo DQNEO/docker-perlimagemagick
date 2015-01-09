@@ -1,4 +1,4 @@
-FROM dqneo/perl:5.20.1
+FROM dqneo/perl
 MAINTAINER DQNEO
 
 RUN yum -y install libjpeg-turbo libjpeg-turbo-devel libpng-devel; yum clean all
