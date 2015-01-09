@@ -21,7 +21,7 @@ RUN curl -sL https://raw.githubusercontent.com/DQNEO/imagemagicks/master/${IM_AR
   && rm -rf ${IM_PREFIX}/src
 
 # add library path
-RUN echo '${IM_PREFIX}/lib/' > /etc/ld.so.conf.d/imagemagick.conf \
+RUN echo ${IM_PREFIX}/lib/ > /etc/ld.so.conf.d/imagemagick.conf \
     && ldconfig
 
 CMD perl -MImage::Magick -E 'say $Image::Magick::Q16::VERSION'
